@@ -2,8 +2,7 @@ use soroban_sdk::{contracttype, Address};
 
 #[derive(Clone)]
 #[contracttype]
-pub enum DataKey {
-    Admin,
-    Token(Address),
-    ReferenceToken,
+pub struct Token {
+    pub address: Address,
+    pub price: i128,
 }
