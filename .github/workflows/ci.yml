@@ -38,7 +38,7 @@ jobs:
         shell: sh
         run: |
           set -e
-          cd src/contracts && 
+          cd src && 
           make build || exit 1
         continue-on-error: false
 
@@ -46,6 +46,6 @@ jobs:
         shell: sh
         run: |
           set -e
-          cd src/contracts && 
+          cd src && 
           cargo test --release || exit 1
         continue-on-error: false
