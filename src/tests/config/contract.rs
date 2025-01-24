@@ -10,6 +10,7 @@ pub struct ContractTest<'a> {
     pub admin: Address,
     pub user_a: Address,
     pub user_b: Address,
+    pub reference_token: (token::Client<'a>, token::StellarAssetClient<'a>, Address),
     pub token: (token::Client<'a>, token::StellarAssetClient<'a>, Address),
 }
 
@@ -18,19 +19,20 @@ impl<'a> ContractTest<'a> {
         let env = Env::default();
         env.mock_all_auths();
 
-        let contract_id = env.register_contract(None, Contract {});
-        let contract = ContractClient::new(&env, &contract_id);
-
-        let admin = Address::generate(&env);
+        let admin: Address = Address::generate(&env);
+        let reference_token_issuer = Address::generate(&env);
         let token_issuer = Address::generate(&env);
-
         let user_a = Address::generate(&env);
         let user_b = Address::generate(&env);
 
         let (token_client, token_admin) = create_token_contract(&env, &token_issuer);
+        let (reference_token_client, reference_token_admin) = create_token_contract(&env, &reference_token_issuer);
 
-        token_admin.mint(&user_a, &BASE_MINT_AMOUNT);
-        token_admin.mint(&user_b, &BASE_MINT_AMOUNT);
+        let contract_id = env.register(Contract, (&admin, &reference_token_client.address));
+        let contract = ContractClient::new(&env, &contract_id);
+
+        reference_token_admin.mint(&user_a, &BASE_MINT_AMOUNT);
+        token_admin.mint(&admin, &BASE_MINT_AMOUNT);
 
         ContractTest {
             env,
@@ -38,6 +40,7 @@ impl<'a> ContractTest<'a> {
             admin,
             user_a,
             user_b,
+            reference_token: (reference_token_client, reference_token_admin, reference_token_issuer),
             token: (token_client, token_admin, token_issuer),
         }
     }
