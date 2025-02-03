@@ -4,7 +4,7 @@ use crate::{
     methods::{
         admin::{get_admin::get_admin, has_admin::has_admin, set_admin::set_admin},
         public::{initialize::initialize, transfer::transfer},
-        token::{set_reference_token::set_reference_token, write_token::write_token},
+        token::{issue_token::issue_token, set_reference_token::set_reference_token},
     },
     storage::types::{error::Error, reference_token::ReferenceToken, token::Token},
 };
@@ -31,24 +31,31 @@ impl Contract {
         )
     }
 
-    pub fn write_token(env: Env, token: Address, price: i128) -> Result<Token, Error> {
-        write_token(
+    pub fn issue_token(
+        env: Env,
+        token: Address,
+        price: i128,
+        supply: i128,
+        owner: Address,
+    ) -> Result<Token, Error> {
+        issue_token(
             &env,
             &Token {
                 address: token,
                 price,
+                supply,
+                owner,
             },
         )
     }
 
     pub fn transfer(
         env: Env,
-        owner: Address,
         investor: Address,
         token_address: Address,
         amount: i128,
     ) -> Result<(), Error> {
-        transfer(&env, owner, investor, token_address, amount)
+        transfer(&env, investor, token_address, amount)
     }
 
     pub fn has_admin(env: Env) -> bool {
