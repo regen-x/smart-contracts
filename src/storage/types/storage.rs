@@ -7,5 +7,5 @@ pub enum DataKey {
     Token(Address),
     ReferenceToken,
     Offer(i128),
-    OrderCount
+    OfferCount
 }
