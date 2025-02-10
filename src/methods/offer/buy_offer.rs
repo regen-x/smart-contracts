@@ -1,11 +1,11 @@
 use soroban_sdk::{token, Address, Env};
 
-use crate::storage::{offer::{read_offer, buy_offer as buy_offer_storage}, reference_token::get_reference_token, types::error::Error};
+use crate::storage::{offer::{buy_offer as buy_offer_storage, read_offer}, reference_token::get_reference_token, types::{error::Error, offer::Offer}};
 
 
 
-pub(crate) fn buy_offer(env: &Env, offer_id: &i128, buyer: &Address) -> Result<i128, Error> {
-    let offer = read_offer(env, offer_id);
+pub(crate) fn buy_offer(env: &Env, offer_id: &i128, buyer: &Address) -> Result<(i128, Offer), Error> {
+    let (_, offer) = read_offer(env, offer_id);
 
     if !offer.is_active {
         return Err(Error::OfferNotActive);
@@ -23,8 +23,7 @@ pub(crate) fn buy_offer(env: &Env, offer_id: &i128, buyer: &Address) -> Result<i
     let token_client = token::Client::new(env, &offer.token_address);
     token_client.transfer(&env.current_contract_address(), &buyer, &offer.amount);
 
-    buy_offer_storage(env, offer_id);
+    let offer = buy_offer_storage(env, offer_id);
 
-    Ok(offer_id.clone())
+    Ok(offer)
 }
-

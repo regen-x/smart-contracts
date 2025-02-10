@@ -64,7 +64,7 @@ impl Contract {
         amount: i128,
         price: i128,
         owner: Address,
-    ) -> Result<i128, Error> {
+    ) -> Result<(i128, Offer), Error> {
         create_offer(&env, &Offer{
             token_address, amount, total_price: price, owner, is_active: true
         })
@@ -74,14 +74,14 @@ impl Contract {
         env: Env,
         offer_id: i128,
         price: i128,
-    ) -> Result<(), Error> {
+    ) -> Result<(i128, Offer), Error> {
         update_offer_price(&env, &offer_id, price)
     }
 
     pub fn cancel_offer(
         env: Env,
         offer_id: i128,
-    ) -> Result<i128, Error> {
+    ) -> Result<(i128, Offer), Error> {
         cancel_offer(&env, &offer_id)
     }
 
@@ -89,7 +89,7 @@ impl Contract {
         env: Env,
         offer_id: i128,
         buyer: Address,
-    ) -> Result<i128, Error> {
+    ) -> Result<(i128, Offer), Error> {
         buy_offer(&env, &offer_id, &buyer)
     }
 
@@ -97,7 +97,7 @@ impl Contract {
         has_admin(&env)
     }
 
-    pub fn read_offer(env: Env, offer_id: i128) -> Result<Offer, Error> {
+    pub fn read_offer(env: Env, offer_id: i128) -> Result<(i128, Offer), Error> {
         read_offer(&env, &offer_id)
     }
 

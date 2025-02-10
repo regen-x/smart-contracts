@@ -145,17 +145,16 @@ fn create_offer_test() {
 
     contract.issue_token(&token_client.address, &token_price, &token_supply, &user_b);
 
-
     let total_balance = token_client.balance(&user_c);
 
     let token_amount_to_sell = 5;
     let token_price_to_sell = 10;
 
-    let offer_id = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
+    let (offer_id, _) = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 
     assert_eq!(token_client.balance(&user_c), total_balance - token_amount_to_sell);
 
-    let offer = contract.read_offer(&offer_id);
+    let (_, offer) = contract.read_offer(&offer_id);
 
     assert_eq!(offer.amount, token_amount_to_sell);
     assert_eq!(offer.total_price, token_price_to_sell);
@@ -188,11 +187,12 @@ fn buy_token_test() {
     let token_price_to_sell = 10;
     let total_balance = token_client.balance(&user_c);
 
-    let offer_id = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
+    let (offer_id, _) = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 
     contract.buy_offer(&offer_id,  &user_d);
     
     assert_eq!(token_client.balance(&user_d), token_amount_to_sell);
+
     assert_eq!(token_client.balance(&user_c), total_balance - token_amount_to_sell);
 }
 
@@ -220,11 +220,11 @@ fn cancel_offer_test() {
 
     let total_balance = token_client.balance(&user_c);
 
-    let offer_id = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
+    let (offer_id, _) = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 
     contract.cancel_offer(&offer_id);
 
-    let offer = contract.read_offer(&offer_id);
+    let (_, offer) = contract.read_offer(&offer_id);
 
     assert_eq!(token_client.balance(&user_c), total_balance);
 
@@ -253,13 +253,13 @@ fn update_offer_test() {
     let token_amount_to_sell = 5;
     let token_price_to_sell = 10;
 
-    let offer_id = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
+    let (offer_id, _) = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 
     let new_token_price_to_sell = 20;
 
     contract.update_offer(&offer_id,  &new_token_price_to_sell);
 
-    let offer = contract.read_offer(&offer_id);
+    let (_, offer) = contract.read_offer(&offer_id);
 
     assert_eq!(offer.total_price, new_token_price_to_sell);
 }
@@ -315,7 +315,7 @@ fn buy_inactive_offer() {
     let token_amount_to_sell = 5;
     let token_price_to_sell = 10;
 
-    let offer_id = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
+    let (offer_id, _) = contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 
     contract.cancel_offer(&offer_id);
 
@@ -342,4 +342,3 @@ fn create_offer_for_non_existing_token() {
 
     contract.create_offer(&token_client.address, &token_amount_to_sell, &token_price_to_sell, &user_c);
 }
-
