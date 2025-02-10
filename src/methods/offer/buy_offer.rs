@@ -1,8 +1,5 @@
 use soroban_sdk::{token, Address, Env};
-
 use crate::storage::{offer::{buy_offer as buy_offer_storage, read_offer}, reference_token::get_reference_token, types::{error::Error, offer::Offer}};
-
-
 
 pub(crate) fn buy_offer(env: &Env, offer_id: &i128, buyer: &Address) -> Result<(i128, Offer), Error> {
     let (_, offer) = read_offer(env, offer_id);
