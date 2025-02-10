@@ -32,5 +32,4 @@ pub fn transfer(
     update_token_supply(env, &token_address, token.supply - amount);
 
     Ok(())
-
 }
