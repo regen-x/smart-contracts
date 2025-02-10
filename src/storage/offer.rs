@@ -1,7 +1,5 @@
 use soroban_sdk::Env;
-
 use super::types::{offer::Offer, storage::DataKey};
-
 
 pub(crate) fn set_offer(env: &Env, offer: &Offer) -> (i128, Offer) {
     let offer_count_key = DataKey::OfferCount;
