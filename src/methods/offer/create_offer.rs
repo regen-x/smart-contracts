@@ -1,4 +1,3 @@
-use crate::storage::offer::read_offer;
 use crate::storage::types::error::Error;
 use crate::storage::{token::has_token, offer::set_offer};
 use crate::storage::types::offer::Offer;
@@ -19,7 +18,7 @@ pub(crate) fn create_offer(env: &Env, offer: &Offer) -> Result<(i128, Offer), Er
     let token_client = token::Client::new(env, &offer.token_address);
     token_client.transfer(&owner, &env.current_contract_address(), &offer.amount);
 
-    let (offer_id, _) = set_offer(env, offer);
+    let created_offer = set_offer(env, offer);
 
-    Ok(read_offer(env, &offer_id))
+    Ok(created_offer)
 }
