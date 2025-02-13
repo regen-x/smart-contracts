@@ -6,4 +6,6 @@ pub enum DataKey {
     Admin,
     Token(Address),
     ReferenceToken,
+    Offer(i128),
+    OfferCount
 }

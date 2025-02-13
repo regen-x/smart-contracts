@@ -19,3 +19,12 @@ pub(crate) fn has_token(env: &Env, address: &Address) -> bool {
 
     env.storage().instance().has(&key)
 }
+
+pub(crate) fn update_token_supply(env: &Env, address: &Address, supply: i128) {
+    let mut token = read_token(env, address);
+    let key = DataKey::Token(address.clone());
+
+    token.supply = supply;
+
+    env.storage().instance().set(&key, &token);
+}

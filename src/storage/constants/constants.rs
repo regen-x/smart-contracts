@@ -1,0 +1,1 @@
+pub const AMOUNT_MULTIPLIER: i128 = 10000000;

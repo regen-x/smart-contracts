@@ -3,9 +3,7 @@ use soroban_sdk::{Address, Env};
 use crate::{
     events,
     storage::{
-        admin::set_admin,
-        reference_token::set_reference_token,
-        types::{error::Error, reference_token::ReferenceToken},
+        admin::set_admin, offer::set_offer_count, reference_token::set_reference_token, types::{error::Error, reference_token::ReferenceToken}
     },
 };
 
@@ -14,6 +12,7 @@ pub fn initialize(env: &Env, admin: Address, reference_token: Address) -> Result
     
     set_admin(env, &admin);
     set_reference_token(env, &ReferenceToken { address: reference_token });
+    set_offer_count(env, &0);
 
     events::contract::contract_initialized(env, &admin);
     Ok(())
