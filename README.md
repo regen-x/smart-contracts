@@ -1,4 +1,8 @@
-# RegenX Smart Contract Template
+# RegenX Smart Contract
+
+### 🌱 Built for **RegenX & Stellar Soroban** 🌍
+
+## This library is designed to streamline **RegenX smart contract** development on the **Stellar Soroban network**, ensuring a seamless experience from **writing, testing, optimizing, and deploying** contracts.
 
 **RegenX Smart Contracts** provides the core functionality to deploy Smart Contracts to the Stellar Network using the **Stellar Soroban** framework. It includes foundational contract logic, deployment scripts, and test configurations to accelerate your development process.
 
@@ -204,7 +208,3 @@ template-stellar-smart-contract/
 This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
 
 ---
-
-### 🌱 Built for **RegenX & Stellar Soroban** 🌍
-
-This library is designed to streamline **RegenX smart contract** development on the **Stellar Soroban network**, ensuring a seamless experience from **writing, testing, optimizing, and deploying** contracts.
