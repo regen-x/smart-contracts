@@ -63,6 +63,49 @@ target/wasm32-unknown-unknown/release/base_contract.wasm
 
 ---
 
+## 📜 Contract Methods
+
+### 🔹 Admin Management
+
+- **`set_admin(admin: Address) -> Result<Address, Error>`**  
+  Updates the admin address of the contract.
+
+- **`get_admin() -> Address`**  
+  Retrieves the current admin address.
+
+- **`has_admin() -> bool`**  
+  Checks if an admin is set.
+
+### 🔹 Token Management
+
+- **`set_reference_token(token_address: Address) -> Result<ReferenceToken, Error>`**  
+  Sets the reference token for transactions.
+
+- **`issue_token(token: Address, price: i128, supply: i128, owner: Address) -> Result<Token, Error>`**  
+  Issues a new token with the specified price, supply, and owner.
+
+- **`transfer(investor: Address, token_address: Address, amount: i128) -> Result<(), Error>`**  
+  Transfers a token to an investor.
+
+### 🔹 Offer Management
+
+- **`create_offer(token_address: Address, amount: i128, price: i128, owner: Address) -> Result<(i128, Offer), Error>`**  
+  Creates a new offer to sell tokens.
+
+- **`update_offer(offer_id: i128, price: i128) -> Result<(i128, Offer), Error>`**  
+  Updates the price of an existing offer.
+
+- **`cancel_offer(offer_id: i128) -> Result<(i128, Offer), Error>`**  
+  Cancels an active offer.
+
+- **`buy_offer(offer_id: i128, buyer: Address) -> Result<(i128, Offer), Error>`**  
+  Allows a buyer to purchase an offer.
+
+- **`read_offer(offer_id: i128) -> Result<(i128, Offer), Error>`**  
+  Reads the details of a specific offer.
+
+---
+
 ### 3️⃣ Optimize the Contract _(Recommended for Deployment)_
 
 For **smaller and more efficient** contracts, optimize the `.wasm` binary:
