@@ -9,4 +9,6 @@ pub enum Error {
     InsufficientBalance = 2,
     InvalidAmount = 3,
     TokenAlreadyExists = 4,
+    OfferNotActive = 5,
+    OfferAmountZero = 6,
 }
