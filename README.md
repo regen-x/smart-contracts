@@ -6,6 +6,15 @@
 
 **RegenX Smart Contracts** provides the core functionality to deploy Smart Contracts to the Stellar Network using the **Stellar Soroban** framework. It includes foundational contract logic, deployment scripts, and test configurations to accelerate your development process.
 
+## Status
+
+This repository contains RegenX’s Soroban smart contract R&D code.
+It is not used by the current RegenX MVP, which is built on Stellar Classic native primitives (asset issuance, trustlines, offers, wallet signed transactions).
+
+## Scope
+
+Soroban is intended for post-MVP automation such as milestone-based controls, revenue logic, and programmable payouts. These contracts are not deployed or invoked in the SCF funded MVP scope.
+
 ## 🚀 Features
 
 - Smart Contract with fundamental **storage, methods, and event handling**.
