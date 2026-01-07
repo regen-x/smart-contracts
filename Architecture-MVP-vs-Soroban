@@ -1,0 +1,135 @@
+## RegenX Architecture: MVP vs Soroban
+## Purpose of This Document
+
+This document clearly distinguishes between:
+
+What the RegenX MVP uses today
+
+What Soroban smart contracts are intended for in future phases
+
+Its purpose is to eliminate ambiguity for reviewers, contributors, and partners regarding which components are deployed, required, and relied upon versus those that are exploratory or post-MVP.
+
+RegenX MVP Architecture (Stellar Classic)
+
+The current RegenX MVP is built exclusively on Stellar Classic native primitives.
+
+These components are deployed, required, and actively used in the MVP.
+
+Core Ledger Primitives Used
+
+1. Native Asset Issuance
+
+Each clean-energy project is represented by a Stellar native asset
+
+Issued by a project-specific issuer account
+
+Distributed via standard Stellar accounts
+
+On-chain balances represent economic ownership
+
+2. Trustlines
+
+Investors establish trustlines to project assets using external wallets
+
+Trustlines are created and managed directly on the Stellar ledger
+
+No contracts or intermediaries abstract this process
+
+3. Protocol-Level Offers
+
+Asset acquisition occurs via Stellar’s built-in orderbook and offer mechanism
+
+Investors sign offer creation and execution transactions using their own wallets
+
+Settlement is handled natively by the Stellar protocol
+
+4. Wallet-Signed Transactions
+
+All investment actions are signed by external wallets (e.g. Lobstr, Albedo)
+
+RegenX does not custody private keys or sign on behalf of users
+
+5. Horizon-Based Indexing
+
+Ownership, balances, and transaction history are derived directly from Horizon
+
+On-chain balances are the system of record for ownership
+
+No off-chain shadow ledgers or mirrored databases
+
+What the MVP Explicitly Does Not Use
+
+Soroban smart contracts
+
+WASM execution
+
+Contract-based escrow
+
+On-chain automation
+
+DeFi primitives
+
+Automated payouts or revenue logic
+
+If all Soroban contracts were removed, the MVP would continue to function without impact.
+
+Soroban Smart Contracts (Post-MVP / Future Phase)
+
+Soroban smart contracts are not required for the current MVP and are not deployed or invoked as part of the SCF-funded scope.
+
+Soroban is reserved for future automation and optimisation, once the core Classic-based workflows are validated in production.
+
+Intended Future Use Cases
+
+Soroban may be introduced post-MVP to support:
+
+Milestone-based capital controls
+
+Conditional release of funds based on verified project milestones
+
+Escrow and capital-locking logic
+
+Programmable holding of funds prior to allocation
+
+Automated payout and revenue distribution
+
+Rule-based distribution of cashflows or credits
+
+Governance and permissioning extensions
+
+Contract-enforced approval or voting mechanisms
+
+These features are additive, not foundational.
+
+They enhance automation but do not replace Stellar Classic primitives.
+
+Deployment Status Summary
+Component	Status	Required for MVP
+Stellar native assets	Deployed	Yes
+Trustlines	Deployed	Yes
+Protocol-level offers	Deployed	Yes
+Horizon indexing	Deployed	Yes
+Soroban contracts	Not deployed	No
+Design Rationale
+
+RegenX intentionally uses Stellar Classic first to:
+
+Minimise attack surface
+
+Reduce audit and regulatory complexity
+
+Deliver a production-ready, institution-grade MVP
+
+Leverage Stellar’s proven strengths in regulated finance and real-world assets
+
+Soroban is treated as a future enhancement layer, not a dependency.
+
+Summary
+
+The RegenX MVP runs entirely on Stellar Classic
+
+Soroban is out of scope, inactive, and non-blocking
+
+Architecture decisions prioritise clarity, compliance, and delivery certainty
+
+This separation is deliberate and enforced in both code and deployment.
