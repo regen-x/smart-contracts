@@ -15,6 +15,8 @@ It is not used by the current RegenX MVP, which is built on Stellar Classic nati
 
 Soroban is intended for post-MVP automation such as milestone-based controls, revenue logic, and programmable payouts. These contracts are not deployed or invoked in the SCF funded MVP scope.
 
+⚠️ Important: RegenX MVP does not require Soroban. Removing this repository does not impact current MVP functionality.
+
 ## 🚀 Features
 
 - Smart Contract with fundamental **storage, methods, and event handling**.
